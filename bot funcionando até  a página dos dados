@@ -1,0 +1,47 @@
+#bot funcionando até  a página dos dados
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
+import time
+
+#definir as variaveis
+usuario = 'Clienteroni'
+senha = 'Clienteroni'
+#cpf = '45155778832'
+
+#acessar site
+browser = webdriver.Chrome()
+browser.maximize_window()
+browser.get("https://www.techbusca.org/") 
+time.sleep(1)
+#login
+username = browser.find_element(By.XPATH,'//*[@id="Login-Form"]/div[1]/input')
+password = browser.find_element(By.XPATH,'//*[@id="Login-Form"]/div[2]/input')
+username.send_keys(usuario)
+password.send_keys(senha)
+time.sleep(2)
+#entrar com login
+browser.find_element(By.XPATH,'//*[@id="Login-Form"]/div[2]/input').send_keys(Keys.ENTER)
+time.sleep(2)
+
+
+
+# loop a partir daqui
+# acessar dosssies
+browser.find_element(By.XPATH,'//*[@id="kt_content"]/div/div[1]/div/a/img').click()
+time.sleep(3)
+
+#browser.find_element(By.XPATH,'//*[@id="Login-Form"]/div[1]/input').click()
+documento = browser.find_element(By.XPATH,'//*[@id="kt_cpf_input"]')
+#escrever o cpf no campo
+documento.send_keys('431.655.148-52')
+# clicar em consultar cpf
+browser.find_element(By.XPATH,'//*[@id="kt_cpf_input"]').send_keys(Keys.ENTER)
+time.sleep(5)
+
+# copiar consulta
+browser.find_element(By.XPATH,'//*[@id="btn-copy"]').click()
+time.sleep(1)
+browser.find_element(By.XPATH,'//*[@id="btn-copy"]').click()
